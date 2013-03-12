@@ -1,2 +1,2 @@
-device_htc_golfu
+TWRP_device_htc_golfu
 ================

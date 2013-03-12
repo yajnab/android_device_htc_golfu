@@ -25,8 +25,10 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 836763136
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 1023409664
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-TARGET_KERNEL_SOURCE := kernel/htc/golfu
-TARGET_KERNEL_CONFIG := golfu_defconfig
+TARGET_PREBUILT_KERNEL := device/htc/golfu/kernel
+
+#TARGET_KERNEL_SOURCE := kernel/htc/golfu
+#TARGET_KERNEL_CONFIG := golfu_defconfig
 
 # This is needed so CWM will function properly
 
@@ -61,3 +63,4 @@ TW_NO_REBOOT_BOOTLOADER := true
 TW_BRIGHTNESS_PATH := /sys/devices/platform/msm_fb.590849/leds/lcd-backlight/brightness
 TW_MAX_BRIGHTNESS := 255
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
+BOARD_USE_CUSTOM_RECOVERY_FONT:= \"font_7x16.h\"
