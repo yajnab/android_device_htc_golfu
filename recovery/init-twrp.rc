@@ -13,14 +13,16 @@ on init
 
     chmod 0755 /sbin/busybox
 
+    mkdir /boot
     mkdir /sdcard
+    mkdir /sd-ext
     mkdir /system
     mkdir /data
     mkdir /data/data
+    mkdir /datadata
     mkdir /cache
-    mkdir /mtdcache
     mkdir /devlog
-    mkdir /internal_sdcard
+    mkdir /emmc
     mount /tmp /tmp tmpfs
 
 on boot
@@ -31,7 +33,16 @@ on boot
 
     class_start default
 
+service ueventd /sbin/ueventd
+    critical
+
 service choice_fn /sbin/choice_fn
+    oneshot
+
+service mfgsrv /sbin/mfgsrv -i -t /dev/ttyS0
+    disabled
+
+service dmesg /sbin/busybox dmesg -n 1
     oneshot
 
 service power_test /sbin/power_test
@@ -39,16 +50,17 @@ service power_test /sbin/power_test
     oneshot
 
 service offmode_charging /sbin/offmode_charging
+    disabled
     oneshot
 
 service detect_key /sbin/detect_key
     oneshot
 
-service ueventd /sbin/ueventd
-    critical
-
 service recovery /sbin/recovery
     disabled
+
+service rmt_storage /sbin/rmt_storage /dev/block/mmcblk0p13 /dev/block/mmcblk0p14
+    user root
 
 service adbd /sbin/adbd recovery
     disabled
@@ -63,24 +75,12 @@ on property:ro.debuggable=1
     write /sys/class/android_usb/android0/iManufacturer $ro.product.manufacturer
     write /sys/class/android_usb/android0/iProduct $ro.product.model
     write /sys/class/android_usb/android0/iSerial $ro.serialno
-
-on property:ro.debuggable=1
     start adbd
-
-on property:ro.debuggable=0
-    stop adbd
-
-service adbd /sbin/adbd recovery
-
-on property:persist.service.adb.enable=1
-    start adbd
-
-on property:persist.service.adb.enable=0
-    stop adbd
-
+    setprop service.adb.root 1
+    
 # Restart adbd so it can run as root
 on property:service.adb.root=1
-   write /sys/class/android_usb/android0/enable 0
-   restart adbd
-   write /sys/class/android_usb/android0/enable 1
+    write /sys/class/android_usb/android0/enable 0
+    restart adbd
+    write /sys/class/android_usb/android0/enable 1
 

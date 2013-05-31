@@ -15,13 +15,12 @@ else
 endif
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
-
-PRODUCT_COPY_FILES += \
+    $(LOCAL_KERNEL):kernel \
     device/htc/golfu/recovery/sbin/choice_fn:recovery/root/sbin/choice_fn \
     device/htc/golfu/recovery/sbin/detect_key:recovery/root/sbin/detect_key \
     device/htc/golfu/recovery/sbin/offmode_charging:recovery/root/sbin/offmode_charging \
-    device/htc/golfu/recovery/sbin/power_test:recovery/root/sbin/power_test
+    device/htc/golfu/recovery/sbin/power_test:recovery/root/sbin/power_test \
+    device/htc/golfu/recovery/sbin/rmt_storage:recovery/root/sbin/rmt_storage   
 
 $(call inherit-product, build/target/product/full.mk)
 

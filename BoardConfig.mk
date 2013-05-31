@@ -23,29 +23,21 @@ BOARD_BOOTIMAGE_PARTITION_SIZE := 4194304
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 8909824
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 836763136
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 1023409664
-BOARD_FLASH_BLOCK_SIZE := 131072
+BOARD_FLASH_BLOCK_SIZE := 2048
 
 TARGET_PREBUILT_KERNEL := device/htc/golfu/kernel
-
-#TARGET_KERNEL_SOURCE := kernel/htc/golfu
-#TARGET_KERNEL_CONFIG := golfu_defconfig
 
 # This is needed so CWM will function properly
 
 BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_USES_MMCUTILS := false
-BOARD_HAS_NO_MISC_PARTITION := false
 
 
 # Actual UMS different from TWRP for some reason
 
-BOARD_UMS_LUNFILE := /sys/class/android_usb/f_mass_storage/lun0/file
-BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
-
-#Lun File testing
-
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_otg/msm_hsusb/gadget/lun0/file
+BOARD_UMS_LUNFILE := /sys/devices/platform/msm_otg/msm_hsusb/gadget/lun0/file
+
 
 # Script
 
@@ -59,7 +51,7 @@ TW_EXTERNAL_STORAGE_PATH := "/sdcard"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard"
 TW_DEFAULT_EXTERNAL_STORAGE := true 
 TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
-# TW_NO_REBOOT_BOOTLOADER := true
+#TW_NO_REBOOT_BOOTLOADER := true
 TW_BRIGHTNESS_PATH := /sys/devices/platform/msm_fb.590849/leds/lcd-backlight/brightness
 TW_MAX_BRIGHTNESS := 255
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
