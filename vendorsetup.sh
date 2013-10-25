@@ -20,5 +20,5 @@
 # In particular, you can add lunch options with the add_lunch_combo
 # function: add_lunch_combo generic-eng
 
-add_lunch_combo full_golfu-userdebug
-add_lunch_combo full_golfu
+add_lunch_combo cm_golfu-userdebug
+add_lunch_combo cm_golfu
